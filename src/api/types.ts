@@ -5,6 +5,8 @@ export type Ship = {
   type: string;
 };
 
+export type Ships = { ships: Ship[] };
+
 export type ShipVars = {
   limit: number;
 };
