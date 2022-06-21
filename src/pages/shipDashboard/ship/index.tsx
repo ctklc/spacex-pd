@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { memo } from 'react';
-import { Ship } from '../../api/types';
+import { Ship } from '../../../api/types';
 
 export type ShipProps = {
   data: Ship;

@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Ship } from '../../api/types';
+import { Ship } from '../../../api/types';
 import ShipView, { View } from '../ship';
 
 export type ShipGalleryProps = {

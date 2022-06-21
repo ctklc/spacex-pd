@@ -4,10 +4,10 @@ import CollectionsIcon from '@mui/icons-material/Collections';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
-import ShipGallery from '../../components/shipGallery';
+import ShipGallery from './shipGallery';
 import { Ships, ShipVars } from '../../api/types';
 import { SHIPS } from '../../api';
-import { View } from '../../components/ship';
+import { View } from './ship';
 
 export default function ShipDashboard() {
   const { loading, data: { ships } = {} } = useQuery<Ships, ShipVars>(SHIPS, {
