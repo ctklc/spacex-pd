@@ -28,7 +28,7 @@ function ShipView({
         }
       : {
           flexDirection: 'row',
-          borderBottom: 0,
+          borderBottom: undefined,
           width: 360
         };
 
@@ -42,6 +42,7 @@ function ShipView({
         position: 'relative',
         gap: 2
       }}
+      data-testid="ShipContainer"
     >
       <img
         width={width}
