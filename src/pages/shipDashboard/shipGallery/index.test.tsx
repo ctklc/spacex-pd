@@ -23,7 +23,7 @@ const mockShipData = [
   }
 ];
 
-describe('Album Card', () => {
+describe('Ship List View', () => {
   const renderShipGallery = ({
     data,
     loading,

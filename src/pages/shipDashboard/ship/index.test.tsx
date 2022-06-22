@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import Ship, { ShipProps, View } from './index';
 
-describe('Album Card', () => {
+describe('Ship Item', () => {
   const mockShipData = {
     id: 'GOMSTREE',
     image: 'https://i.imgur.com/MtEgYbY.jpg',
