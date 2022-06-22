@@ -8,5 +8,6 @@ export type Ship = {
 export type Ships = { ships: Ship[] };
 
 export type ShipVars = {
-  limit: number;
+  limit?: number;
+  offset?: number;
 };
