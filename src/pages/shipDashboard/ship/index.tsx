@@ -13,14 +13,29 @@ export enum View {
   GALLERY
 }
 
+type FlexDirection = 'column' | 'row';
+
 function ShipView({
   data: { image, name, type },
   view = View.GALLERY
 }: ShipProps) {
+  const { flexDirection, borderBottom, width } =
+    view === View.GALLERY
+      ? {
+          flexDirection: 'column',
+          borderBottom: 1,
+          width: 240
+        }
+      : {
+          flexDirection: 'row',
+          borderBottom: 0,
+          width: 360
+        };
+
   return (
     <Box
-      flexDirection={view === View.GALLERY ? 'column' : 'row'}
-      borderBottom={view === View.GALLERY ? 1 : 0}
+      flexDirection={flexDirection as FlexDirection}
+      borderBottom={borderBottom}
       sx={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -29,7 +44,7 @@ function ShipView({
       }}
     >
       <img
-        width={240}
+        width={width}
         height={200}
         alt={name}
         src={image}

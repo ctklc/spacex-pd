@@ -1,13 +1,12 @@
-import Button from '@mui/material/Button';
-import CollectionsIcon from '@mui/icons-material/Collections';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Box from '@mui/material/Box';
 import { useQuery } from '@apollo/client';
+import { SelectChangeEvent } from '@mui/material/Select';
 import ShipGallery from './shipGallery';
 import { Ships, ShipVars } from '../../api/types';
 import { View } from './ship';
 import { SHIPS } from '../../api';
+import Actions from './actions/actions';
 
 export default function ShipDashboard() {
   const shipsLimit = 15;
@@ -21,9 +20,18 @@ export default function ShipDashboard() {
     }
   });
   const [viewMode, setViewMode] = useState<View>(View.GALLERY);
+  const [shipType, setShipType] = useState<string>('');
+  const shipTypes = useMemo(
+    () => [...new Set(ships?.map(({ type }) => type) || [])],
+    [ships]
+  );
 
   const toggleViewChange = () => {
     setViewMode((prev) => (prev === View.LIST ? View.GALLERY : View.LIST));
+  };
+
+  const handleTypeChange = ({ target: { value } }: SelectChangeEvent) => {
+    setShipType(value);
   };
 
   const handleLoadMore = (offset?: number) => {
@@ -43,7 +51,9 @@ export default function ShipDashboard() {
     }
   };
 
-  const isListView = viewMode === View.LIST;
+  const filteredShips = shipType
+    ? ships?.filter(({ type }) => shipType === type)
+    : ships;
 
   return (
     <Box
@@ -55,18 +65,15 @@ export default function ShipDashboard() {
       }}
       data-testid="ShipDashboardContainer"
     >
-      <Button
-        variant="outlined"
-        startIcon={isListView ? <ViewListIcon /> : <CollectionsIcon />}
-        aria-label="viewMode"
-        onClick={toggleViewChange}
-        sx={{ width: 200 }}
-        size="small"
-      >
-        {isListView ? 'List View' : 'Gallery View'}
-      </Button>
+      <Actions
+        view={viewMode}
+        type={shipType}
+        types={shipTypes}
+        handleTypeChange={handleTypeChange}
+        toggleViewChange={toggleViewChange}
+      />
       <ShipGallery
-        data={ships}
+        data={filteredShips}
         loading={loading}
         view={viewMode}
         onLoadMore={handleLoadMore}
